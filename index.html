@@ -13,6 +13,89 @@
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 72 72%22><text y=%22.9em%22 font-size=%2260%22>🎂</text></svg>"
     />
     <link rel="stylesheet" href="./style/style.css" />
+    <!-- 小作文（信）专用样式：内联，保证一定能生效 -->
+    <style>
+      /* 整段独立成页：不叠在任何动画段落上，普通文档流即可 */
+      #letterSection {
+        position: relative;
+        z-index: 1;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 72px 20px 96px;
+        text-align: left;
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      #letterSection *,
+      #letterSection *::before,
+      #letterSection *::after {
+        box-sizing: border-box;
+      }
+
+      .letter-card {
+        float: none !important;
+        position: relative !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        margin: 0 auto;
+        max-width: 640px;
+        width: 100%;
+        padding: 36px 26px;
+        border-radius: 18px;
+        background: rgba(255, 250, 244, 0.07);
+        border: 1px solid rgba(255, 240, 224, 0.2);
+        text-align: left;
+        font-size: 16px;
+        line-height: 2;
+        letter-spacing: 0.02em;
+        color: rgba(255, 246, 232, 0.92);
+        overflow: hidden;
+      }
+
+      .letter-card p {
+        float: none !important;
+        clear: both;
+        position: static !important;
+        display: block;
+        width: 100%;
+        margin: 0 0 1em;
+        text-align: left;
+        text-indent: 2em;
+        line-height: 2;
+        letter-spacing: 0.02em;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .letter-card .letter-to,
+      .letter-card .letter-salutation {
+        font-size: 17px;
+        font-weight: 700;
+        color: #ffe9c7;
+        text-indent: 0;
+      }
+
+      .letter-card .letter-sign,
+      .letter-card .letter-date {
+        text-indent: 0;
+        text-align: right;
+        color: rgba(255, 233, 199, 0.85);
+      }
+
+      /* 手机上再放大一点，保证可读 */
+      @media (max-width: 480px) {
+        #letterSection {
+          padding: 48px 16px 72px;
+        }
+        .letter-card {
+          padding: 28px 20px;
+          font-size: 16px;
+          line-height: 1.95;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Preloader -->
@@ -124,7 +207,7 @@
         </p>
       </div>
 
-      <div class="section-ten">
+      <div class="section-ten" id="letterSection">
         <div class="letter-card">
           <p class="letter-to">致我最好的朋友：</p>
           <p class="letter-salutation">见字如晤，展信安好。</p>

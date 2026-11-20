@@ -13,26 +13,32 @@
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 72 72%22><text y=%22.9em%22 font-size=%2260%22>🎂</text></svg>"
     />
     <link rel="stylesheet" href="./style/style.css" />
-    <!-- 小作文（信）专用样式：内联，保证一定能生效 -->
+    <!-- 小作文（信）专用样式 -->
     <style>
-      /* 整段独立成页：不叠在任何动画段落上，普通文档流即可 */
-      #letterSection {
+      /* 信的舞台：独立一屏，和前面的动画段落完全隔开，黑色背景继续往下延伸 */
+      #letterStage {
         position: relative;
-        z-index: 1;
+        z-index: 5;
         box-sizing: border-box;
         width: 100%;
-        padding: 72px 20px 96px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+        background-color: #000;
         text-align: left;
         font-family: "Kaiti SC", "STKaiti", "KaiTi", "楷体",
           "PingFang SC", "Microsoft YaHei", sans-serif;
       }
 
-      #letterSection *,
-      #letterSection *::before,
-      #letterSection *::after {
+      #letterStage *,
+      #letterStage *::before,
+      #letterStage *::after {
         box-sizing: border-box;
       }
 
+      /* 纸质信卡片：白纸 + 深色字，一眼就能看清楚 */
       .letter-card {
         float: none !important;
         position: relative !important;
@@ -40,18 +46,25 @@
         opacity: 1 !important;
         visibility: visible !important;
         margin: 0 auto;
-        max-width: 640px;
         width: 100%;
-        padding: 36px 26px;
-        border-radius: 18px;
-        background: rgba(255, 250, 244, 0.07);
-        border: 1px solid rgba(255, 240, 224, 0.2);
-        text-align: left;
+        max-width: 400px;
+        height: calc(100vh - 80px);
+        max-height: 760px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 30px 24px;
+        border-radius: 6px;
+        background-color: #fbf7f0;
+        background-image: radial-gradient(
+          rgba(150, 120, 90, 0.05) 1px,
+          transparent 1px
+        );
+        background-size: 18px 18px;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+        color: #2f2a26;
         font-size: 16px;
         line-height: 2;
         letter-spacing: 0.02em;
-        color: rgba(255, 246, 232, 0.92);
-        overflow: hidden;
       }
 
       .letter-card p {
@@ -67,13 +80,14 @@
         letter-spacing: 0.02em;
         white-space: normal;
         word-break: break-word;
+        color: #2f2a26;
       }
 
       .letter-card .letter-to,
       .letter-card .letter-salutation {
         font-size: 17px;
         font-weight: 700;
-        color: #ffe9c7;
+        color: #5a4632;
         text-indent: 0;
       }
 
@@ -81,16 +95,23 @@
       .letter-card .letter-date {
         text-indent: 0;
         text-align: right;
-        color: rgba(255, 233, 199, 0.85);
+        color: #5a4632;
       }
 
-      /* 手机上再放大一点，保证可读 */
+      .letter-card::-webkit-scrollbar {
+        width: 4px;
+      }
+      .letter-card::-webkit-scrollbar-thumb {
+        background: rgba(90, 70, 50, 0.3);
+        border-radius: 2px;
+      }
+
       @media (max-width: 480px) {
-        #letterSection {
-          padding: 48px 16px 72px;
+        #letterStage {
+          padding: 24px 12px;
         }
         .letter-card {
-          padding: 28px 20px;
+          padding: 26px 20px;
           font-size: 16px;
           line-height: 1.95;
         }
@@ -207,36 +228,6 @@
         </p>
       </div>
 
-      <div class="section-ten" id="letterSection">
-        <div class="letter-card">
-          <p class="letter-to">致我最好的朋友：</p>
-          <p class="letter-salutation">见字如晤，展信安好。</p>
-          <p class="letter-body">
-            开始读了吗，有想起我的声音吗？此时此刻，敲下这些文字，想要将我的思念与祝福传递给你。
-          </p>
-          <p class="letter-body">
-            最近过得怎么样？工作还顺利吗？有好好吃饭吗？有好好睡觉吗？天冷有记得添衣吗？毕业已经两年多，这两年我们见面寥寥，和你一起玩仿佛已经是上个世纪的事了。直到现在，我还是很怀念和你在一起的日子。
-          </p>
-          <p class="letter-body">
-            上课一人一半的耳机；一起去围墙拿饭；一起吐槽班上的烂人烂事。往事历历在目，旧人却不在身边。有时候我觉得，人与人之间的关系像一件需要时时擦拭的旧物，光泽或许会淡，温度或许会凉，但它的存在本身就已经是一种安慰。我并不祈求我们必须时时刻刻站在彼此的生活中央，但我希望在你心里，始终为我留一个角落——不必大，只需足够放下那些一起笑过的瞬间、沉默过的黄昏，以及曾经轻轻交换过的脆弱和勇气。你是我所选择的朋友，而不只是偶然遇见的某某。所以我珍惜你，如同珍惜一场不会重来的雨，一次没有预告的日出，一封没有邮票却依然抵达的信。也许未来我们会变得不像现在一样频繁地分享日常，但请你记得：我曾认真聆听过你的心事，也曾郑重地收藏过你的话语。
-          </p>
-          <p class="letter-body">
-            其实我的大学生活并不好。我不喜欢我的同学和室友，他们总是做一些让我不开心的事情，我也没有能力去完全摆脱他们，只能默默承受着。有时候想找你倾诉一下，可转念一想，你也没有理由做我的情绪垃圾桶，你也有自己的事情要忙。所以有些话就永远停留在文字输入框里。还是怀念以前一下课就能找你蛐蛐的日子。
-          </p>
-          <p class="letter-body">
-            但是没关系，把这些字敲下来，我的心情其实已经好了一大半。其实时至今日，我还是接受不了“阶段性朋友”这个说法，我总觉得好朋友就要一辈子。可是越长大越觉得，我的想法好天真。我们不在一个城市，生活也不在一个轨道，甚至连共同话题都越来越难找，有时候甚至恍惚觉得，仿佛我们的相遇就是为了离别。不过，我还是谢谢你，谢谢你的细腻，谢谢你的关心，谢谢你的陪伴。我还是想和你做一辈子好朋友，谢谢你在我的生命里留下浓墨重彩的一笔。
-          </p>
-          <p class="letter-body">
-            讲这么多，我都忘记正事了。愿你新的一岁，依然明亮、自由、善良且坚韧。也愿我们，还能一起走很长的路，说很多的话，发很多的呆。哪怕只是隔着人海轻轻点头，也能瞬间读懂对方眼中的“我懂”。
-          </p>
-          <p class="letter-body">
-            生日快乐，我的朋友。我在今天深深祝愿你，也祝愿我们：不会走散，不会陌生，不会成为彼此变得模糊的某某。真心永远为你留存一角。
-          </p>
-          <p class="letter-sign">你的朋友，<br />波比</p>
-          <p class="letter-date">2026 年 12 月 3 日</p>
-        </div>
-      </div>
-
       <div class="section-nine">
         <p style="margin-bottom: 2rem">生日快乐！🎂💘</p>
         <br /><br /><br />
@@ -245,6 +236,37 @@
         <p class="last-smile">永远开心！🥂</p>
       </div>
     </div>
+
+    <!-- 小作文：独立的一屏，脱离上面的动画容器 -->
+    <section id="letterStage">
+      <div class="letter-card">
+        <p class="letter-to">致我最好的朋友：</p>
+        <p class="letter-salutation">见字如晤，展信安好。</p>
+        <p class="letter-body">
+          开始读了吗，有想起我的声音吗？此时此刻，敲下这些文字，想要将我的思念与祝福传递给你。
+        </p>
+        <p class="letter-body">
+          最近过得怎么样？工作还顺利吗？有好好吃饭吗？有好好睡觉吗？天冷有记得添衣吗？毕业已经两年多，这两年我们见面寥寥，和你一起玩仿佛已经是上个世纪的事了。直到现在，我还是很怀念和你在一起的日子。
+        </p>
+        <p class="letter-body">
+          上课一人一半的耳机；一起去围墙拿饭；一起吐槽班上的烂人烂事。往事历历在目，旧人却不在身边。有时候我觉得，人与人之间的关系像一件需要时时擦拭的旧物，光泽或许会淡，温度或许会凉，但它的存在本身就已经是一种安慰。我并不祈求我们必须时时刻刻站在彼此的生活中央，但我希望在你心里，始终为我留一个角落——不必大，只需足够放下那些一起笑过的瞬间、沉默过的黄昏，以及曾经轻轻交换过的脆弱和勇气。你是我所选择的朋友，而不只是偶然遇见的某某。所以我珍惜你，如同珍惜一场不会重来的雨，一次没有预告的日出，一封没有邮票却依然抵达的信。也许未来我们会变得不像现在一样频繁地分享日常，但请你记得：我曾认真聆听过你的心事，也曾郑重地收藏过你的话语。
+        </p>
+        <p class="letter-body">
+          其实我的大学生活并不好。我不喜欢我的同学和室友，他们总是做一些让我不开心的事情，我也没有能力去完全摆脱他们，只能默默承受着。有时候想找你倾诉一下，可转念一想，你也没有理由做我的情绪垃圾桶，你也有自己的事情要忙。所以有些话就永远停留在文字输入框里。还是怀念以前一下课就能找你蛐蛐的日子。
+        </p>
+        <p class="letter-body">
+          但是没关系，把这些字敲下来，我的心情其实已经好了一大半。其实时至今日，我还是接受不了“阶段性朋友”这个说法，我总觉得好朋友就要一辈子。可是越长大越觉得，我的想法好天真。我们不在一个城市，生活也不在一个轨道，甚至连共同话题都越来越难找，有时候甚至恍惚觉得，仿佛我们的相遇就是为了离别。不过，我还是谢谢你，谢谢你的细腻，谢谢你的关心，谢谢你的陪伴。我还是想和你做一辈子好朋友，谢谢你在我的生命里留下浓墨重彩的一笔。
+        </p>
+        <p class="letter-body">
+          讲这么多，我都忘记正事了。愿你新的一岁，依然明亮、自由、善良且坚韧。也愿我们，还能一起走很长的路，说很多的话，发很多的呆。哪怕只是隔着人海轻轻点头，也能瞬间读懂对方眼中的“我懂”。
+        </p>
+        <p class="letter-body">
+          生日快乐，我的朋友。我在今天深深祝愿你，也祝愿我们：不会走散，不会陌生，不会成为彼此变得模糊的某某。真心永远为你留存一角。
+        </p>
+        <p class="letter-sign">你的朋友，<br />波比</p>
+        <p class="letter-date">2026 年 12 月 3 日</p>
+      </div>
+    </section>
 
     <!-- Music Control -->
     <div class="music-control" id="musicControl">
